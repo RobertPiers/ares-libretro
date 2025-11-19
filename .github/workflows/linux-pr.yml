@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  linux-build:
-    name: Build desktop ares (Linux)
+  linux-libretro:
+    name: Build libretro core (Linux)
     runs-on: ubuntu-24.04
     steps:
     - name: Checkout source code
@@ -24,7 +24,29 @@ jobs:
       run: |
         sudo apt-get update -y -qq
         sudo apt-get install -y cmake ccache ninja-build libsdl2-dev libgtk-3-dev libao-dev libopenal-dev qt6-base-dev
-    - name: Configure
-      run: cmake --preset ubuntu-ci
-    - name: Build
-      run: cmake --build build --target ares
+    - name: Build libretro cores
+      run: .github/scripts/build_libretro.sh
+      env:
+        TARGET_PRESET: libretro-linux
+        LIBRETRO_TARGETS: ares_gb_libretro
+    - name: Build processor test harnesses
+      run: cmake --build build --target arm7tdmi i8080 m68000
+    - name: Run processor regression tests
+      run: .github/scripts/run_processor_tests.sh
+    - name: Package libretro cores
+      run: |
+        mkdir -p artifacts
+        mapfile -t cores < <(find build -type f -name '*_libretro.so')
+        if [ "${#cores[@]}" -eq 0 ]; then
+          echo "No libretro cores were produced"
+          exit 1
+        fi
+        for core in "${cores[@]}"; do
+          install -Dm755 "$core" "artifacts/$(basename "$core")"
+        done
+        tar -cvJf libretro-linux.tar.xz -C artifacts .
+    - name: Upload libretro core
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      with:
+        name: libretro-linux
+        path: libretro-linux.tar.xz
