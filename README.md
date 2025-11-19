@@ -99,6 +99,11 @@ games optionally support 64DD expansion disks, so this option can be used to
 suppress the "64DD Disk" file dialog, and assume any secondary content is
 disconnected.
 
+Core options
+------------
+
+Test text heading for the core options.
+
 High-level Components
 ---------------------
 
