@@ -94,10 +94,15 @@ can do:
 `ares "Super GameBoy.sfc" "Super Mario Land.gb"`
 
 The --no-file-prompt option is useful if you wish to launch a game from CLI
-without being prompted to load additional roms. For example, some Nintendo 64 
+without being prompted to load additional roms. For example, some Nintendo 64
 games optionally support 64DD expansion disks, so this option can be used to
-suppress the "64DD Disk" file dialog, and assume any secondary content is 
+suppress the "64DD Disk" file dialog, and assume any secondary content is
 disconnected.
+
+Core options
+------------
+
+Test text heading for the core options.
 
 High-level Components
 ---------------------
