@@ -26,6 +26,7 @@ set(
 add_subdirectory(ares)
 add_subdirectory(mia)
 add_subdirectory(desktop-ui)
+add_subdirectory(libretro)
 
 option(ARES_BUILD_OPTIONAL_TARGETS "Include supplemental tools and tests" OFF)
 
