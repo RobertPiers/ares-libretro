@@ -29,6 +29,39 @@ ares supports building on Windows, macOS, and various Linux/BSD distributions. S
 * [Linux](https://github.com/ares-emulator/ares/wiki/Build-Instructions-For-Linux)
 * [BSD](https://github.com/ares-emulator/ares/wiki/Build-Instructions-For-BSD)
 
+### Building the libretro core (Linux)
+
+To reproduce the Linux libretro build that runs in CI, follow the same steps on
+an Ubuntu 24.04 (or newer) host:
+
+1. Install the packages that the workflow uses:
+
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y cmake ninja-build libsdl2-dev libgtk-3-dev libao-dev \
+       libopenal-dev qt6-base-dev
+   ```
+
+2. Configure with the `ubuntu-ci` preset (this mirrors the CI configuration):
+
+   ```bash
+   cmake --preset ubuntu-ci
+   ```
+
+3. Build the desired libretro targets via the helper script. It reads a
+   space-separated `LIBRETRO_TARGETS` variable and defaults to the Game Boy
+   core:
+
+   ```bash
+   LIBRETRO_TARGETS="ares_gb_libretro" .github/scripts/build_libretro.sh
+   ```
+
+   Add more cores (for example `ares_sfc_libretro`) by appending them to the
+   `LIBRETRO_TARGETS` value before invoking the script.
+
+4. Copy the resulting `*_libretro.so` binaries from the `build/` directory into
+   your RetroArch `cores/` directory.
+
 Command-line options
 --------------------
 
