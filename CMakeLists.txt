@@ -4,6 +4,8 @@ include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/common/bootstrap.cmake" NO_POLICY_SCO
 
 project(ares VERSION ${ARES_VERSION_CANONICAL})
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 include(compilerconfig)
 include(defaults)
 include(helpers)

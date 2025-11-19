@@ -6,7 +6,6 @@
 #include <vector>
 
 
-#define MIA_LIBRARY
 #include <mia/mia.hpp>
 #include <gb/gb.hpp>
 
