@@ -6,15 +6,15 @@ set(.github_sources
     ISSUE_TEMPLATE/bug_report.md
     ISSUE_TEMPLATE/feature_request.md
     ISSUE_TEMPLATE/game-issue-report.md
+    scripts/build_libretro.sh
     scripts/build_macos.sh
     scripts/build_ubuntu.sh
     scripts/build_windows.sh
     scripts/package_artifacts.sh
-    workflows/build-aux.yml
+    scripts/run_processor_tests.sh
     workflows/build.yml
-    workflows/pr.yml
-    workflows/push.yml
-    workflows/release.yml
+    workflows/libretro.yml
+    workflows/linux-pr.yml
 )
 
 target_sources(

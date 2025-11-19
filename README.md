@@ -31,24 +31,25 @@ ares supports building on Windows, macOS, and various Linux/BSD distributions. S
 
 ### Building the libretro core (Linux)
 
-To reproduce the Linux libretro build that runs in CI, follow the same steps on
-an Ubuntu 24.04 (or newer) host:
+The libretro workflow only relies on standard Linux toolchains, so you can
+reproduce the same build on any distribution. Install the usual development
+packages using your distro's package manager (for example the Ubuntu command
+below):
 
-1. Install the packages that the workflow uses:
+```bash
+sudo apt-get update
+sudo apt-get install -y cmake ninja-build libsdl2-dev libgtk-3-dev libao-dev \
+    libopenal-dev qt6-base-dev
+```
+
+1. Configure with the `libretro-linux` preset. It mirrors the CI build and
+   disables shader bundling since RetroArch already ships the slang shaders:
 
    ```bash
-   sudo apt-get update
-   sudo apt-get install -y cmake ninja-build libsdl2-dev libgtk-3-dev libao-dev \
-       libopenal-dev qt6-base-dev
+   cmake --preset libretro-linux
    ```
 
-2. Configure with the `ubuntu-ci` preset (this mirrors the CI configuration):
-
-   ```bash
-   cmake --preset ubuntu-ci
-   ```
-
-3. Build the desired libretro targets via the helper script. It reads a
+2. Build the desired libretro targets via the helper script. It reads a
    space-separated `LIBRETRO_TARGETS` variable and defaults to the Game Boy
    core:
 
@@ -59,8 +60,9 @@ an Ubuntu 24.04 (or newer) host:
    Add more cores (for example `ares_sfc_libretro`) by appending them to the
    `LIBRETRO_TARGETS` value before invoking the script.
 
-4. Copy the resulting `*_libretro.so` binaries from the `build/` directory into
-   your RetroArch `cores/` directory.
+3. Copy the resulting `*_libretro.so` binaries from the `build/` directory into
+   your RetroArch `cores/` directory. You do not need to package any shaders
+   alongside the core because RetroArch provides them already.
 
 Command-line options
 --------------------

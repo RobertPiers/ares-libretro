@@ -30,7 +30,7 @@ jobs:
     - name: Build libretro cores
       run: .github/scripts/build_libretro.sh
       env:
-        TARGET_PRESET: ubuntu-ci
+        TARGET_PRESET: libretro-linux
         LIBRETRO_TARGETS: ares_gb_libretro
     - name: Build processor test harnesses
       run: cmake --build build --target arm7tdmi i8080 m68000

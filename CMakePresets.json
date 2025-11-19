@@ -168,6 +168,15 @@
       }
     },
     {
+      "name": "libretro-linux",
+      "displayName": "Linux (libretro cores)",
+      "description": "Libretro-focused build used by CI and local reproductions",
+      "inherits": ["ubuntu-ci"],
+      "cacheVariables": {
+        "ARES_BUNDLE_SHADERS": false
+      }
+    },
+    {
       "name": "ubuntu-ci-clang",
       "displayName": "Ubuntu CI (clang)",
       "description": "Single-arch binary for building on Github Actions",
