@@ -3,6 +3,12 @@ add_library(ares::nall ALIAS nall)
 
 # Ensure RTTI is available for polymorphic types consumed by shared cores
 set_target_properties(nall PROPERTIES CXX_RTTI ON)
+target_compile_options(
+  nall
+  PRIVATE
+    $<$<COMPILE_LANG_AND_ID:CXX,AppleClang,Clang,GNU>:-frtti>
+    $<$<CXX_COMPILER_ID:MSVC>:/GR>
+)
 
 add_library(nall-headers INTERFACE)
 add_library(ares::nall::headers ALIAS nall-headers)
