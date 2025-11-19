@@ -32,6 +32,10 @@ jobs:
       env:
         TARGET_PRESET: ubuntu-ci
         LIBRETRO_TARGETS: ares_gb_libretro
+    - name: Build processor test harnesses
+      run: cmake --build build --target arm7tdmi i8080 m68000
+    - name: Run processor regression tests
+      run: .github/scripts/run_processor_tests.sh
     - name: Package libretro cores
       run: |
         mkdir -p artifacts
