@@ -21,6 +21,3 @@ jobs:
     name: Build ares (auxiliary)
     uses: ./.github/workflows/build-aux.yml
     secrets: inherit
-  build-libretro:
-    name: Build libretro cores (Linux)
-    uses: ./.github/workflows/libretro.yml
