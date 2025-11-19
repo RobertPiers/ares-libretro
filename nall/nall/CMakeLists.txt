@@ -1,6 +1,9 @@
 add_library(nall OBJECT main.cpp nall.cpp sljitAllocator.cpp)
 add_library(ares::nall ALIAS nall)
 
+# Ensure RTTI is available for polymorphic types consumed by shared cores
+set_target_properties(nall PROPERTIES CXX_RTTI ON)
+
 add_library(nall-headers INTERFACE)
 add_library(ares::nall::headers ALIAS nall-headers)
 target_link_libraries(nall PUBLIC ares::nall::headers)
